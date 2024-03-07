@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Reproductor</title>
+		<link rel="stylesheet" type="text/css" href="src/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Darker+Grotesque|Poiret+One&display=swap" rel="stylesheet">
+		<script src="https://cdn.tailwindcss.com"></script><!--https://cdnjs.com/libraries/jquery-->
+		<script>
+			tailwind.config = {//<!--tailwindcss.com-->
+			  theme: {
+				extend: {
+				  colors: {
+					clifford: '#da373d',
+				  }
+				}
+			  }
+			}
+		  </script>		
+	</head>
+	<body>
+		
+		<div class="audio-player">
+			<div>
+				<div class="audio-wrapper" id="player-container" >
+					<audio id="player" preload="metadata" onloadedmetadata="mDur()" ontimeupdate="initProgressBar()">
+						<source src="" type="audio/mp3">
+					</audio>
+				</div>
+				<div class="player-controls">
+					<div>
+						<div>
+							<p class="title">Titulo Cancion</p>
+						</div>
+						<div class="range">
+							<input id="dur" type="range" class="range" name="rng" min="0" max="1" step="0.00000001" value="0" onclick="mSet()">
+						</div>
+						<br>
+						<span class="time start-time"></span>
+						<span class="time end-time"></span>
+						<br>
+						<div class="ctrl">
+							<div><!-- https://flowbite.com/icons/ -->
+								<a href="#prev" class="ctrl_btn " id="prev">
+									<button class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600" type="button">
+										<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+											<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 16.9V7a1 1 0 0 0-1.6-.8l-6 5a1 1 0 0 0 0 1.5l6 4.9a1 1 0 0 0 1.6-.8Z"/>
+										  </svg>
+									</button>
+								</a>
+								<a id="play-btn" class="fa fa-play">		
+									<button class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600" type="button">
+										<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+											<path fill-rule="evenodd" d="M8 5a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H8Zm7 0a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1Z" clip-rule="evenodd"/>
+										  </svg>
+								 </button>
+								</a>
+								<a href="#next" class="ctrl_btn " id="next">
+									<button class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600" type="button">
+										<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+											<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16.9V7a1 1 0 0 1 1.6-.8l6 5a1 1 0 0 1 0 1.5l-6 4.9a1 1 0 0 1-1.6-.8Z"/>
+										  </svg>
+									</button>
+								</a>
+							</div>
+							<div class="volumeControl">
+								<div class="wrapper">
+									<button class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600" type="button">
+									<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.5 8.4a5 5 0 0 1 0 7.1m2.9 2.9a9 9 0 0 0 0-12.8m-6.4.5V18a1 1 0 0 1-1.6.7L6 15H4a1 1 0 0 1-1-1v-4c0-.6.4-1 1-1h2l4.4-3.6A1 1 0 0 1 12 6Z"/>
+									  </svg>
+									</button>
+										<span class="outer">
+										<span class="inner"></span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><!--https://cdnjs.com/libraries/jquery-->
+		<script type="text/javascript" src="src/script.js"></script>
+	</body>
+</html>
